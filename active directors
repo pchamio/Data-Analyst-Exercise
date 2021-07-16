@@ -1,0 +1,31 @@
+CREATE TABLE directors (
+ 	director_id BIGINT GENERATED ALWAYS AS IDENTITY,
+ 	director_name VARCHAR(250),
+ 	PRIMARY KEY (director_id)
+ );
+
+ CREATE TABLE movies (
+ 	movie_id INT GENERATED ALWAYS AS IDENTITY,
+ 	title VARCHAR(250),
+ 	year INT,
+ 	rating NUMERIC,
+ 	director_id BIGINT,
+ 	PRIMARY KEY (movie_id),
+ 	CONSTRAINT fk_directors
+ 		FOREIGN KEY(director_id) 
+ 			REFERENCES directors(director_id)
+ );
+ 
+-- insert data file in csv both directors.csv and movies.csv
+
+select * from directors;
+select * from movies;
+
+CREATE TABLE active_director AS
+SELECT m.year, director_name, max(count(title)) AS total_movie
+FROM movies m
+INNER JOIN directors d ON m.director_id = d.director_id
+GROUP BY (m.year, d.director_name)
+ORDER BY m.year ASC, total_movie DESC, director_name ASC;
+
+
