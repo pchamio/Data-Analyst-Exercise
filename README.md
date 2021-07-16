@@ -6,3 +6,4 @@ To run the code locally:
 1. Download the code file along with those two dataset
 2. Run it on tools such as Jupiter notebook, Google Colab or whichever you feel like
 3. The outoput will present 
+4. run sql script and add data set from csv manually
